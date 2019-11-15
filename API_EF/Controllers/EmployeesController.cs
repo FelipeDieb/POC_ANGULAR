@@ -47,5 +47,22 @@ namespace PocAPI.Controllers
                 return BadRequest(ex.Data);
             }
         }
+		
+		 [HttpGet("started-in-the-last-six-months")]
+        public ActionResult<IEnumerable<Employee>> StartedLastMonth()
+        {
+            try
+            {
+
+                return Ok(_repository.All()
+                    .Where(x => x.CreatedAt >= DateTime.Now.AddMonths(-6) && x.CreatedAt <= DateTime.Now)
+                    .GroupBy(x => x.StartMonth)
+                    .Select(g => new { Month = new { Name = Enum.GetName(typeof(Month), g.Key), Number = g.Key }, Count = g.Count() }));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Data);
+            }
+        }
     }
 }

@@ -19,12 +19,12 @@ export class GraphLineComponent implements OnInit {
   lineChartData: ChartDataSets[] = [{data: [], label: 'Employees'}];
  
 
-  lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June'];
+  lineChartLabels: Label[] = [];
 
   lineChartOptions = {
     responsive: true,
     title: {
-      text: 'Employees started from January to June',
+      text: 'Employees started in the last six months',
       display: true
     },
     render: 'percentage'
@@ -37,7 +37,7 @@ export class GraphLineComponent implements OnInit {
   public data2 = [];
 
   ngOnInit() {
-    this.pocService.getEmployeesStartedJanAndjune().pipe(takeUntil(this.unsubscribe))
+    this.pocService.getEmployeesStartedInTheLastSixMonths().pipe(takeUntil(this.unsubscribe))
     .subscribe(result => {  
       this.lineChartData = []; 
       this.lineChartLabels = [];

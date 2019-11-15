@@ -20,4 +20,8 @@ export class PocService {
   getEmployeesStartedJanAndjune(): Observable<any> {
     return this.http.get<any>(`https://localhost:5001/api/employees/started-between-january-and-june`);
   }
+  
+    getEmployeesStartedInTheLastSixMonths(): Observable<any> {
+    return this.http.get<any>(`https://localhost:5001/api/employees/started-in-the-last-six-months`);
+  }
 }
